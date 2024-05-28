@@ -6,9 +6,9 @@ all : build
 
 .PHONY : firefox chromium
 firefox : clean primary-deps
-	yarn workspace firefox webpack serve
+	npx yarn workspace firefox webpack serve
 chromium : clean primary-deps
-	yarn workspace chromium webpack serve
+	npx yarn workspace chromium webpack serve
 
 .PHONY : fix
 fix :
@@ -37,7 +37,7 @@ pristine : clean
 	- rm -rf node_modules
 
 node_modules : package.json
-	yarn --frozen-lockfile
+	npx yarn --frozen-lockfile
 	touch node_modules
 .PHONY : ensure-node-modules
 ensure-node-modules :
@@ -52,7 +52,7 @@ eslint :
 
 .PHONY : outdated build build.firefox build.chromium
 outdated : primary-deps
-	- yarn outdated
+	- npx yarn outdated
 build : build.firefox build.chromium
 build.firefox : node_modules primary-deps
 	$(MAKE) --directory=packages/firefox bundle build
