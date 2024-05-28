@@ -129,7 +129,7 @@
     "message": "Switzerland"
   },
   "country_name_CI": {
-    "message": "Cote D'Ivoire"
+    "message": "Cote d'Ivoire"
   },
   "country_name_CK": {
     "message": "Cook Islands"
@@ -672,7 +672,7 @@
     "message": "Tonga"
   },
   "country_name_TR": {
-    "message": "Turkey"
+    "message": "Türkiye"
   },
   "country_name_TT": {
     "message": "Trinidad and Tobago"
