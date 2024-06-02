@@ -1,4 +1,4 @@
-import { parse, ParsedUrlQuery } from 'querystring';
+import type { ParsedUrlQuery } from 'querystring';
 
 import { useEffect, useState } from 'react';
 
@@ -7,7 +7,8 @@ export function useQueryParams() {
 
   useEffect(() => {
     function handlePopState() {
-      setQueryParams(parse(location.search.substring(1)));
+      const searchParams = new URLSearchParams(location.search).entries();
+      setQueryParams(Object.fromEntries(searchParams));
     }
 
     handlePopState();

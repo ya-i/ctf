@@ -14,7 +14,7 @@ class ChromiumBundle extends bundler.Bundle {
       {
         plugins: [
           new webpack.ProvidePlugin({
-            browser: ['webextension-polyfill-ts', 'browser'],
+            browser: 'webextension-polyfill',
           }),
         ],
       },
@@ -28,10 +28,12 @@ class ChromiumManifestFactory extends bundler.ManifestFactory {
     const manifest = super.create(bundle, _, entrypoints);
 
     if (bundle.devServer) {
-      manifest.content_security_policy = [
-        `script-src 'self' 'unsafe-eval' http://localhost:${bundle.devServer.port}`,
-        "object-src 'self'",
-      ].join('; ');
+      manifest.content_security_policy = {
+        extension_pages: [
+          `script-src 'self' 'wasm-unsafe-eval' http://localhost:${bundle.devServer.port}`,
+          "object-src 'self'",
+        ].join('; '),
+      };
     }
 
     return manifest;

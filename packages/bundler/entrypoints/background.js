@@ -9,8 +9,10 @@ const { BasicEntrypoint } = require('./_basic');
 class BackgroundEntrypoint extends BasicEntrypoint {
   get configuration() {
     return merge(this._maxmindMocks, this._devServer, {
+      target: 'webworker',
+
       entry: {
-        background: `${this.bundle.runtimePath}/entrypoints/background`,
+        service_worker: `${this.bundle.runtimePath}/entrypoints/service_worker`,
       },
 
       module: {

@@ -13,7 +13,7 @@ class ManifestFactory {
     const { author, version } = bundle.pkg;
 
     return {
-      manifest_version: 2,
+      manifest_version: 3,
 
       name: '__MSG_ext_name__',
       version,
@@ -22,7 +22,7 @@ class ManifestFactory {
       description: '__MSG_ext_description__',
       icons: this.icons,
 
-      page_action: {
+      action: {
         default_icon: this.icons,
         default_popup: bundle.popup.filepath,
         show_matches: ['<all_urls>'],
@@ -34,12 +34,11 @@ class ManifestFactory {
 
       author,
       background: {
-        scripts: entrypoints.background,
+        service_worker: entrypoints.service_worker[0],
       },
 
-      minimum_chrome_version: '36',
-
-      permissions: ['webRequest', '<all_urls>', 'storage'],
+      permissions: ['webRequest', 'storage', 'offscreen'],
+      host_permissions: ['*://*/*'],
 
       short_name: '__MSG_ext_short_name__',
       version_name: this._getVersionTag(bundle.pkg),

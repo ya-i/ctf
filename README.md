@@ -92,7 +92,7 @@ Then, run the watch mode:
 yarn start
 ```
 
-<small>While it's building you may want to check out [how to load an unpacked extension](https://developer.chrome.com/extensions/faq#faq-dev-01) in Google Chrome.</small>
+<small>While it's building you may want to check out [how to load an unpacked extension](https://developer.chrome.com/docs/extensions/get-started/tutorial/hello-world#load-unpacked) in Google Chrome.</small>
 
 Once it's built you will be able to load the extension from a `./bundle` directory in the appropriate package.
 

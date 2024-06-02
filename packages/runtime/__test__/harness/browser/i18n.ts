@@ -1,4 +1,4 @@
-import { I18n } from 'webextension-polyfill-ts';
+import { I18n } from 'webextension-polyfill';
 
 import * as locale from '../../../../bundle/content/_locales/en/messages.json';
 

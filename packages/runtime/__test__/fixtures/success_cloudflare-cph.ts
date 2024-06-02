@@ -1,4 +1,4 @@
-export const state = 'success' as const;
+export const state = 'success';
 
 export const request = {
   url: 'https://ilin.dk/',

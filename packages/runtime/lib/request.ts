@@ -1,4 +1,4 @@
-import { WebRequest } from 'webextension-polyfill-ts';
+import { WebRequest } from 'webextension-polyfill';
 
 import * as dnsService from '../services/dns/dns_service';
 import * as debug from '../util/debug';

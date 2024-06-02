@@ -1,4 +1,4 @@
-import { Runtime } from 'webextension-polyfill-ts';
+import { Runtime } from 'webextension-polyfill';
 
 import { BootCommand } from '../commands/boot';
 import * as xpc from '../services/xpc/xpc_background_service';

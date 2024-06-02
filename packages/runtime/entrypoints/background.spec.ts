@@ -1,4 +1,4 @@
-import { Tabs, WebRequest } from 'webextension-polyfill-ts';
+import { Tabs, WebRequest } from 'webextension-polyfill';
 
 import * as harness from '../__test__/harness';
 import * as controllers from '../controllers';
@@ -107,7 +107,8 @@ describe('Background script', () => {
       ) => Promise<void> | void;
 
       harness.browser.i18n();
-      harness.browser.pageAction();
+      harness.browser.storage();
+      harness.browser.action();
 
       beforeEach(() => {
         const responseStartedSpy = jest.spyOn(
@@ -131,7 +132,7 @@ describe('Background script', () => {
 
           expect(reportService.collect).not.toHaveBeenCalled();
           expect(
-            storageService.reports.fetch(browser.tabs.TAB_ID_NONE)
+            await storageService.reports.fetch(browser.tabs.TAB_ID_NONE)
           ).toBeNull();
         });
 
@@ -143,7 +144,7 @@ describe('Background script', () => {
           await responseStartedCallback(payload);
 
           expect(reportService.collect).toHaveBeenCalledWith(payload);
-          expect(storageService.reports.fetch(99)).toMatchObject({
+          expect(await storageService.reports.fetch(99)).toMatchObject({
             iso: 'UA',
             countryName: 'Ukraine',
             traceroute: [
@@ -159,7 +160,7 @@ describe('Background script', () => {
           });
           expect(reportService.collect).toHaveBeenCalledTimes(1);
 
-          storageService.reports.remove(99);
+          await storageService.reports.remove(99);
         });
       });
 
@@ -172,25 +173,22 @@ describe('Background script', () => {
             });
 
             it('should update title from the report', () =>
-              expect(browser.pageAction.setTitle).toHaveBeenCalledWith({
+              expect(browser.action.setTitle).toHaveBeenCalledWith({
                 tabId,
                 title: 'Capture The Flag:\nUkraine',
               }));
 
             it('should update popup from the report', () =>
-              expect(browser.pageAction.setPopup).toHaveBeenCalledWith({
+              expect(browser.action.setPopup).toHaveBeenCalledWith({
                 tabId,
                 popup: `popup.html?tab=${tabId}`,
               }));
 
             it('should update icon from the report', () =>
-              expect(browser.pageAction.setIcon).toHaveBeenCalledWith({
+              expect(browser.action.setIcon).toHaveBeenCalledWith({
                 tabId,
                 path: '/assets/twemoji/ua.svg',
               }));
-
-            it('should call .show()', () =>
-              expect(browser.pageAction.show).toHaveBeenCalledWith(tabId));
           });
 
           describe('for a tab that has no report', () => {
@@ -198,22 +196,19 @@ describe('Background script', () => {
             prepareTabActivated(tabId);
 
             it('should not change title', () =>
-              expect(browser.pageAction.setTitle).not.toHaveBeenCalled());
+              expect(browser.action.setTitle).not.toHaveBeenCalled());
 
             it('should set appropriate popup', () =>
-              expect(browser.pageAction.setPopup).toHaveBeenCalledWith({
+              expect(browser.action.setPopup).toHaveBeenCalledWith({
                 tabId,
                 popup: `popup.html?tab=${tabId}`,
               }));
 
             it('should set the default icon', () =>
-              expect(browser.pageAction.setIcon).toHaveBeenCalledWith({
+              expect(browser.action.setIcon).toHaveBeenCalledWith({
                 tabId,
                 path: 'DEFAULT_ICON',
               }));
-
-            it('should call .show()', () =>
-              expect(browser.pageAction.show).toHaveBeenCalledWith(tabId));
           });
         });
 
@@ -223,25 +218,22 @@ describe('Background script', () => {
             prepareTabUpdate(tabId);
 
             it('should update title from the report', () =>
-              expect(browser.pageAction.setTitle).toHaveBeenCalledWith({
+              expect(browser.action.setTitle).toHaveBeenCalledWith({
                 tabId,
                 title: 'Capture The Flag:\nUkraine',
               }));
 
             it('should update popup from the report', () =>
-              expect(browser.pageAction.setPopup).toHaveBeenCalledWith({
+              expect(browser.action.setPopup).toHaveBeenCalledWith({
                 tabId,
                 popup: `popup.html?tab=${tabId}`,
               }));
 
             it('should update icon from the report', () =>
-              expect(browser.pageAction.setIcon).toHaveBeenCalledWith({
+              expect(browser.action.setIcon).toHaveBeenCalledWith({
                 tabId,
                 path: '/assets/twemoji/ua.svg',
               }));
-
-            it('should call .show()', () =>
-              expect(browser.pageAction.show).toHaveBeenCalledWith(tabId));
           });
 
           describe('after it is ready', () => {
@@ -249,16 +241,13 @@ describe('Background script', () => {
             prepareTabUpdate(tabId, 'complete');
 
             it('should not change title', () =>
-              expect(browser.pageAction.setTitle).not.toHaveBeenCalled());
+              expect(browser.action.setTitle).not.toHaveBeenCalled());
 
             it('should not change popup', () =>
-              expect(browser.pageAction.setPopup).not.toHaveBeenCalled());
+              expect(browser.action.setPopup).not.toHaveBeenCalled());
 
             it('should not change icon', () =>
-              expect(browser.pageAction.setIcon).not.toHaveBeenCalled());
-
-            it('should not call .show()', () =>
-              expect(browser.pageAction.show).not.toHaveBeenCalled());
+              expect(browser.action.setIcon).not.toHaveBeenCalled());
           });
         });
 
@@ -271,7 +260,7 @@ describe('Background script', () => {
               'addListener'
             ).mock.calls[0][0];
 
-            storageService.reports.update(
+            await storageService.reports.update(
               tabId,
               await reportService.collect({})
             );
@@ -299,7 +288,7 @@ function prepareTabActivated(tabId: number, payload?: Record<string, unknown>) {
     ).mock.calls[0][0];
 
     if (payload) {
-      storageService.reports.update(
+      await storageService.reports.update(
         tabId,
         await reportService.collect(payload)
       );
@@ -311,9 +300,7 @@ function prepareTabActivated(tabId: number, payload?: Record<string, unknown>) {
     } as Tabs.OnActivatedActiveInfoType);
   });
 
-  afterEach(() => {
-    storageService.reports.remove(tabId);
-  });
+  afterEach(() => storageService.reports.remove(tabId));
 }
 
 function prepareTabUpdate(tabId: number, status = 'loading') {
@@ -321,7 +308,7 @@ function prepareTabUpdate(tabId: number, status = 'loading') {
     const tabUpdatedCallback = jest.spyOn(browser.tabs.onUpdated, 'addListener')
       .mock.calls[0][0];
 
-    storageService.reports.update(
+    await storageService.reports.update(
       tabId,
       await reportService.collect({
         ip: '195.64.224.65',
@@ -336,7 +323,5 @@ function prepareTabUpdate(tabId: number, status = 'loading') {
     );
   });
 
-  afterEach(() => {
-    storageService.reports.remove(tabId);
-  });
+  afterEach(() => storageService.reports.remove(tabId));
 }

@@ -16,7 +16,10 @@ describe('Airports Script', () => {
     });
 
     it('should respect double quotes in input', async () => {
-      const spy = jest.spyOn(csvStream, 'createStream');
+      const spy = jest.spyOn(
+        csvStream as { createStream: jest.Mock },
+        'createStream'
+      );
 
       const mainTyped = main as () => Promise<void>;
       const ignoredResult = await mainTyped();

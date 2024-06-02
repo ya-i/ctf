@@ -22,5 +22,6 @@ export const error: Console['error'] = console.error.bind(globalThis);
 
 export const assert: Console['assert'] = console.assert.bind(globalThis);
 
-type AssertNever = (message: string) => never;
-export const never = console.assert.bind(globalThis, true) as AssertNever;
+export function never(message: string): never {
+  throw new Error(message);
+}

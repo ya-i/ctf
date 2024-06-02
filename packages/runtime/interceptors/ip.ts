@@ -16,7 +16,6 @@ export async function dispatch({
     return [];
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   const countryResponse = db!.get(ip);
   if (!countryResponse) {
     return [];

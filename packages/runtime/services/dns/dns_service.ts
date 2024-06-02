@@ -1,4 +1,4 @@
-import { Dns } from 'webextension-polyfill-ts';
+import { Dns } from 'webextension-polyfill';
 
 import * as debug from '../../util/debug';
 import { supportsResolveDNS } from '../env/env_service';

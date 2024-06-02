@@ -24,6 +24,11 @@ class Bundle {
     return { basename: 'options', title: 'Options', filepath: 'options.html' };
   }
 
+  get offscreen() {
+    const basename = 'offscreen';
+    return { basename, title: 'Offscreen', filepath: `${basename}.html` };
+  }
+
   get isDevelopment() {
     return this.env.WEBPACK_SERVE;
   }

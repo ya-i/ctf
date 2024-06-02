@@ -8,7 +8,7 @@ class UIEntrypoint extends ReactEntrypoint {
   constructor(bundle) {
     super(bundle);
 
-    this.html = [bundle.popup, bundle.options];
+    this.html = [bundle.popup, bundle.options, bundle.offscreen];
     this._createEntry = this._createEntry.bind(this);
     this._createHtml = this._createHtml.bind(this);
   }

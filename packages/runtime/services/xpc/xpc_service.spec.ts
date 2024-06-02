@@ -8,19 +8,17 @@ import * as xpcPopupService from './xpc_popup_service';
 
 describe('XPC service', () => {
   describe('Background part', () => {
+    harness.browser.storage();
+
     describe('fetchReport', () => {
       const storageService = require('../storage/storage_service') as {
         reports: Repository<Report>;
       };
       const report = new Report(new Request({ url: 'fake' }));
 
-      beforeEach(() => {
-        storageService.reports.update(777, report);
-      });
+      beforeEach(() => storageService.reports.update(777, report));
 
-      afterEach(() => {
-        storageService.reports.remove(777);
-      });
+      afterEach(() => storageService.reports.remove(777));
 
       it('should fetch a report', () =>
         expect(

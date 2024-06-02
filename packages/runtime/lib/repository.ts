@@ -1,19 +1,15 @@
 export class Repository<T> {
-  private _storage: Map<number, T>;
-
-  constructor() {
-    this._storage = new Map();
+  async fetch(id: number): Promise<T | null> {
+    const key = id.toString();
+    const result: Record<string, T> = await browser.storage.session.get([key]);
+    return result[key] ?? null;
   }
 
-  fetch(id: number): T | null {
-    return this._storage.has(id) ? (this._storage.get(id) as T) : null;
-  }
-
-  update(id: number, value: T) {
-    this._storage.set(id, value);
+  update(id: number, value: unknown) {
+    return browser.storage.session.set({ [id]: value });
   }
 
   remove(id: number) {
-    this._storage.delete(id);
+    return browser.storage.session.remove(id.toString());
   }
 }

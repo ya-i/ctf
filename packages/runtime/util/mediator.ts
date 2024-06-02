@@ -11,6 +11,7 @@ export interface Action<C extends Command> {
 }
 
 interface Observer<C extends Command> {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   commandCtor: new (...args: any[]) => C;
   action: Action<C>;
 }
@@ -18,6 +19,7 @@ interface Observer<C extends Command> {
 export const observers: Observer<Command>[] = [];
 
 export function subscribe<C extends Command>(
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   commandCtor: new (...args: any[]) => C,
   action: Action<C>
 ) {

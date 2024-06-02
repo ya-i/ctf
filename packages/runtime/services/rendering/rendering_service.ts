@@ -5,10 +5,6 @@ type RenderingInput = ReadonlyArray<{
   dataUri: string;
 }>;
 
-export interface RenderingOutput {
-  [size: number]: ImageData;
-}
-
 export async function render(images: RenderingInput) {
   const renders = await Promise.all(
     images.map(({ dataUri, size }) => raster.toImageData(dataUri, size))
@@ -19,5 +15,5 @@ export async function render(images: RenderingInput) {
     dict[size] = img;
 
     return dict;
-  }, {} as RenderingOutput);
+  }, {} as Record<string, ImageData>);
 }

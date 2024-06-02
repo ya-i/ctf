@@ -1,4 +1,4 @@
-import { Storage } from 'webextension-polyfill-ts';
+import { Storage } from 'webextension-polyfill';
 
 import * as debug from '../../../../runtime/util/debug';
 
@@ -9,16 +9,15 @@ type Preferences = Record<string, string>;
 export function storage(prefs: Preferences = {}) {
   const browser = stub();
 
-  const _prefs = JSON.parse(JSON.stringify(prefs)) as Preferences;
   const get = (keys: string[] | null) => {
     if (keys == null) {
-      return Promise.resolve(_prefs);
+      return Promise.resolve(prefs);
     } else if (Array.isArray(keys)) {
       return Promise.resolve(
         Object.fromEntries(
           keys
-            .filter((key) => _prefs[key] !== undefined)
-            .map((key) => [key, _prefs[key]])
+            .filter((key) => prefs[key] !== undefined)
+            .map((key) => [key, prefs[key]])
         )
       );
     } else {
@@ -35,6 +34,7 @@ export function storage(prefs: Preferences = {}) {
       return {
         get: jest.fn(get),
         set: jest.fn(set),
+        remove: jest.fn(),
       };
     }
 
@@ -47,6 +47,7 @@ export function storage(prefs: Preferences = {}) {
       sync: createArea() as Storage.Static['sync'],
       managed: createArea() as Storage.Static['managed'],
       onChanged: onChanged as Storage.Static['onChanged'],
+      session: createArea() as Storage.Static['session'],
     };
   });
 

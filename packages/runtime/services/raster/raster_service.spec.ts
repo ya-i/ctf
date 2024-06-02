@@ -1,3 +1,4 @@
+import * as canvasModule from './canvas';
 import * as raster from './raster_service';
 
 describe('Raster service', () => {
@@ -20,7 +21,7 @@ describe('Raster service', () => {
     });
 
     it('should set width & height', () => {
-      raster.createCanvas({ width: 666, height: 777 });
+      canvasModule.createCanvas({ width: 666, height: 777 });
 
       expect(canvas).toHaveProperty('width', 666);
       expect(canvas).toHaveProperty('height', 777);
@@ -32,7 +33,7 @@ describe('Raster service', () => {
         .spyOn(canvas, 'getContext')
         .mockReturnValue(contextSymbol as CanvasRenderingContext2D);
 
-      expect(raster.createCanvas({ width: 111, height: 999 })).toBe(
+      expect(canvasModule.createCanvas({ width: 111, height: 999 })).toBe(
         contextSymbol
       );
 

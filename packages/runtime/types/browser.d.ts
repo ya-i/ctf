@@ -1,4 +1,5 @@
-import { Browser } from 'webextension-polyfill-ts';
+import 'chrome-types';
+import { Browser } from 'webextension-polyfill';
 
 declare interface MockedBrowser extends Browser {
   ctfHarness?: boolean;

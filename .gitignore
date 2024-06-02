@@ -14,6 +14,7 @@ coverage
 /packages/*/bundle/manifest.json
 /packages/*/bundle/popup.html
 /packages/*/bundle/options.html
+/packages/*/bundle/offscreen.html
 /packages/*/bundle/*.js
 /packages/*/bundle/*.css
 /packages/*/bundle/*.svg

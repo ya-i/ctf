@@ -1,4 +1,4 @@
-import { Dns } from 'webextension-polyfill-ts';
+import { Dns } from 'webextension-polyfill';
 
 import { stub } from './stub';
 

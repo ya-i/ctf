@@ -1,34 +1,19 @@
+import * as debug from '../../util/debug';
+
+import * as canvas from './canvas';
+import * as offscreen from './offscreen';
+
 // TODO https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvas
-
-interface CanvasSize {
-  width: number;
-  height: number;
-}
-
-export function createCanvas({ width, height }: CanvasSize) {
-  const canvas = document.createElement('canvas');
-  canvas.width = width;
-  canvas.height = height;
-
-  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-  const ctx = canvas.getContext('2d')!;
-
-  return ctx;
-}
+// Requires fix to the upstream bug first https://issues.chromium.org/issues/41250699
 
 export function toImageData(dataUri: string, size: number) {
-  return new Promise<ImageData>((resolve, reject) => {
-    const img = new Image(size, size);
+  if (canvas.isSupported) {
+    return canvas.render(size, dataUri);
+  }
 
-    img.onerror = reject;
-    img.onload = function () {
-      const ctx = createCanvas(img);
+  if (offscreen.isSupported) {
+    return offscreen.render(size, dataUri);
+  }
 
-      ctx.drawImage(img, 0, 0);
-
-      resolve(ctx.getImageData(0, 0, img.width, img.height));
-    };
-
-    img.src = dataUri;
-  });
+  return debug.never('No supported rendering method found');
 }

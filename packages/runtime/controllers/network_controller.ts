@@ -1,4 +1,4 @@
-import { WebRequest } from 'webextension-polyfill-ts';
+import { WebRequest } from 'webextension-polyfill';
 
 import { BootCommand } from '../commands/boot';
 import { ReportReadyCommand } from '../commands/report_ready';

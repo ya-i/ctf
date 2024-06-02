@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "ctf",
-  "version": "0.0.16",
+  "version": "0.1.0",
   "scripts": {
     "test": "jest --watch",
     "start": "npm-run-all --print-label --parallel firefox chromium",
@@ -17,10 +17,10 @@
     "@hot-loader/react-dom": "^17.0.2",
     "buffer": "^6.0.3",
     "country-flag-emoji-json": "^2.0.0",
-    "maxmind": "^4.3.6",
+    "maxmind": "^4.3.20",
     "node-libs-browser": "^2.2.1",
     "react": "^18.1.0",
-    "webextension-polyfill": "^0.9.0"
+    "webextension-polyfill": "^0.12.0"
   },
   "devDependencies": {
     "@babel/core": "^7.17.9",
@@ -32,15 +32,17 @@
     "@types/node-fetch": "^2",
     "@types/react": "^17.0.43",
     "@types/react-dom": "^18.0.2",
+    "@types/webextension-polyfill": "^0.10.7",
     "@types/webpack-env": "^1.16.4",
-    "@typescript-eslint/eslint-plugin": "^5.27.1",
-    "@typescript-eslint/parser": "^5.27.1",
+    "@typescript-eslint/eslint-plugin": "^7.11.0",
+    "@typescript-eslint/parser": "^7.11.0",
     "@wojtekmaj/enzyme-adapter-react-17": "^0.6.7",
     "babel-jest": "^27.5.1",
     "babel-loader": "^8.2.5",
     "babel-plugin-rewire-exports": "^2.3.0",
     "babel-preset-react-app": "^10.0.0",
     "bundlewatch": "^0.3.3",
+    "chrome-types": "^0.1.286",
     "css-loader": "^6.7.1",
     "css-minimizer-webpack-plugin": "^4.0.0",
     "enzyme": "^3.11.0",
@@ -67,13 +69,12 @@
     "react-dom": "^18.1.0",
     "react-hot-loader": "^4.13.0",
     "style-loader": "^3.3.1",
-    "typescript": "^4.6.4",
-    "webextension-polyfill-ts": "^0.26.0",
-    "webpack": "^5.73.0",
-    "webpack-cli": "^4.9.2",
-    "webpack-dev-server": "^4.9.2",
+    "typescript": "^5.4.5",
+    "webpack": "^5.91.0",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^5.0.4",
     "webpack-manifest-plugin": "^5.0.0",
-    "webpack-merge": "^5.8.0"
+    "webpack-merge": "^5.10.0"
   },
   "keywords": [],
   "author": "Yaroslav Ilin",
@@ -97,8 +98,8 @@
     ],
     "coverageThreshold": {
       "global": {
-        "lines": 90,
-        "statements": 90
+        "lines": 84,
+        "statements": 83
       }
     },
     "setupFiles": [

@@ -1,5 +1,4 @@
 import { ActionRefreshCommand } from '../commands/action_refresh';
-import { Icon } from '../services/icon/icon_service';
 import * as iconService from '../services/icon/icon_service';
 import * as storageService from '../services/storage/storage_service';
 import * as debug from '../util/debug';
@@ -7,12 +6,12 @@ import * as mediator from '../util/mediator';
 
 export interface ActionRefreshPayload {
   popup: string;
-  icon: Icon | null;
+  icon: iconService.Icon | null;
   title: string | null;
 }
 
 mediator.subscribe(ActionRefreshCommand, async function ({ tabId }) {
-  const report = storageService.reports.fetch(tabId);
+  const report = await storageService.reports.fetch(tabId);
 
   const action: ActionRefreshPayload = {
     popup: 'popup.html?tab=' + tabId.toString(),
@@ -39,12 +38,11 @@ async function refresh(
   { popup, icon, title }: ActionRefreshPayload
 ) {
   if (title) {
-    browser.pageAction.setTitle({ tabId, title });
+    void browser.action.setTitle({ tabId, title });
   }
 
   await Promise.all([
-    browser.pageAction.setPopup({ tabId, popup }),
-    browser.pageAction.setIcon({ tabId, ...icon }),
-    browser.pageAction.show(tabId),
+    browser.action.setPopup({ tabId, popup }),
+    browser.action.setIcon({ tabId, ...icon }),
   ]);
 }

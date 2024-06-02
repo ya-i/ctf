@@ -20,6 +20,7 @@ export function stub() {
         onMessage: { addListener: jest.fn() },
       },
       tabs: {
+        TAB_ID_NONE: -1,
         onActivated: { addListener: jest.fn() },
         onUpdated: { addListener: jest.fn() },
         onRemoved: { addListener: jest.fn() },
@@ -28,7 +29,7 @@ export function stub() {
         onResponseStarted: { addListener: jest.fn() },
       },
 
-      pageAction: {},
+      action: {},
     });
   });
 

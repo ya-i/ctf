@@ -26,11 +26,6 @@ class BasicEntrypoint {
           hotUpdateChunkFilename: 'hot/chunk~[id]~[fullhash].js',
           hotUpdateMainFilename: 'hot/main_[runtime]_[fullhash].json',
         },
-        optimization: {
-          runtimeChunk: {
-            name: (entrypoint) => `${entrypoint.name}.runtime`,
-          },
-        },
       },
       this.configuration,
       this.bundle.extra

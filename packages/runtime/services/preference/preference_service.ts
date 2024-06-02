@@ -1,4 +1,4 @@
-import { Storage } from 'webextension-polyfill-ts';
+import { Storage } from 'webextension-polyfill';
 
 import * as debug from '../../util/debug';
 
@@ -20,7 +20,7 @@ const _prefs = Object.assign(
 
 export function getValue<T extends PreferenceKeys>(
   prefName: T
-): typeof _prefs[T];
+): (typeof _prefs)[T];
 export function getValue(prefName: string): string;
 export function getValue(prefName: string) {
   assertKnownPreference(prefName);

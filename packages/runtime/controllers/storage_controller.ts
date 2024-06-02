@@ -12,12 +12,12 @@ mediator.subscribe(BootCommand, function () {
 });
 
 mediator.subscribe(ReportReadyCommand, async function ({ tabId, report }) {
-  storageService.reports.update(tabId, report);
+  await storageService.reports.update(tabId, report);
 
   debug.log(`Tab#${tabId}: Report has been collected`, report);
   await mediator.publish(new ActionRefreshCommand(tabId));
 });
 
 mediator.subscribe(TabRemoveCommand, function ({ tabId }) {
-  storageService.reports.remove(tabId);
+  return storageService.reports.remove(tabId);
 });

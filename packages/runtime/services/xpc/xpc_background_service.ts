@@ -16,7 +16,7 @@ export function handle(message: Message) {
 }
 
 function fetchReport(tabId: number) {
-  const report = storageService.reports.fetch(tabId);
-
-  return Promise.resolve(report ? report.toJSON() : null);
+  return storageService.reports
+    .fetch(tabId)
+    .then((report) => (report ? report.toJSON() : null));
 }

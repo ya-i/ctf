@@ -1,9 +1,7 @@
+import flagsByCode from 'country-flag-emoji-json/dist/by-code.json';
+
 import { isKeyof, lookupUpperCase } from '../../util/common';
 import * as debug from '../../util/debug';
-
-const flagsByCode = Object.create(
-  null
-) as typeof import('country-flag-emoji-json/dist/by-code.json');
 
 let ready = false;
 
@@ -38,15 +36,7 @@ export const twemoji = {
   },
 };
 
-export let init = function () {
-  const promise = import('country-flag-emoji-json/dist/by-code.json').then(
-    (flags) => {
-      ready = true;
-
-      return Object.assign(flagsByCode, flags.default);
-    }
-  );
-
-  init = () => promise;
-  return promise;
+export const init = function () {
+  ready = true;
+  return flagsByCode;
 };

@@ -1,3 +1,5 @@
+import type { Action } from 'webextension-polyfill';
+
 import { Report } from '../../lib/report';
 import * as debug from '../../util/debug';
 import { twemoji } from '../emoji/emoji_service';
@@ -6,7 +8,7 @@ import * as preferenceService from '../preference/preference_service';
 import * as renderingService from '../rendering/rendering_service';
 import * as svg from '../svg/svg_service';
 
-export type Icon = Unwrap<ReturnType<typeof getIcon>>;
+export type Icon = Action.SetIconDetailsType;
 
 export const sizes = [16, 32, 64, 128, 160] as const;
 
@@ -17,7 +19,7 @@ export const defaultIconPromise = createImageData((size: number) =>
 export async function getIcon(
   { flag, iso }: Report,
   pref = preferenceService.getValue('render')
-) {
+): Promise<Icon> {
   switch (pref) {
     case 'twemoji': {
       const path = twemoji.getFilePath(iso);
@@ -57,5 +59,5 @@ async function createImageData(factory: (size: number) => string) {
 
   return {
     imageData: await renderingService.render(images),
-  };
+  } as Icon;
 }
