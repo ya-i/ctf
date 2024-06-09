@@ -1,0 +1,4 @@
+node_modules/
+**/*.mmdb
+**/*.d.?ts
+lib/**/index.mjs

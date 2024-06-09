@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+
+  "include": ["*.ts"],
+
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "Preserve",
+    "skipLibCheck": true,
+    "noEmit": true,
+
+    "strict": true,
+    "forceConsistentCasingInFileNames": true
+  }
+}

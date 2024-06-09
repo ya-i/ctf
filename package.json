@@ -1,0 +1,26 @@
+{
+  "private": true,
+  "name": "ctf",
+  "version": "0.1.0",
+  "author": "nilfalse.com",
+  "license": "MPL-2.0",
+  "scripts": {
+    "postinstall": "make lib/maxmind"
+  },
+  "dependencies": {
+    "buffer": "^6.0.3",
+    "mmdb-lib": "^2.1.1"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "prettier": "^3.3",
+    "webpack-cli": "^5.1.4"
+  },
+  "peerDependencies": {
+    "typescript": "*"
+  },
+  "type": "module",
+  "prettier": {
+    "singleQuote": true
+  }
+}
