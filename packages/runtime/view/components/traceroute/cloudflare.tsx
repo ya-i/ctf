@@ -31,7 +31,7 @@ export const CloudflareTrace: FC<CloudflareTraceProps> = ({ match }) => {
       <Link
         variant="light"
         size="xs"
-        href="https://support.cloudflare.com/hc/articles/200172516-Understanding-Cloudflare-s-CDN#h_bd959d6a-39c0-4786-9bcd-6e6504dcdb97"
+        href="https://developers.cloudflare.com/cache/concepts/cache-responses/"
         target="_blank"
         title='What does "Cache status" mean?'
       >
