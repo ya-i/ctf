@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+
+  "include": ["*.mts", "webpack.config.mjs"],
+
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "Preserve",
+    "types": [],
+    "declaration": true,
+
+    "strict": true,
+    "forceConsistentCasingInFileNames": true
+  }
+}
