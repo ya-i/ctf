@@ -8,6 +8,7 @@ lib/maxmind :
 .PHONY : fmt
 fmt :
 	bun x prettier --write .
+	bun x eslint --fix .
 	@ git diff-index --quiet HEAD
 
 .PHONY : test
