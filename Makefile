@@ -9,10 +9,14 @@ fmt :
 
 .PHONY : test
 test :
-	@ $(MAKE) --directory=lib/maxmind test
+	bun test
+
+.PHONY : clean
+clean :
+	-rm assets/chromium/{*.json,*.js}
 
 .PHONY : distclean
-distclean :
+distclean : clean
 	-rm assets/public/maxmind/GeoLite2-Country.mmdb
 	-@ $(MAKE) --directory=lib/maxmind clean
 	-rm -r node_modules
