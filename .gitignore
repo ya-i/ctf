@@ -1,4 +1,5 @@
 node_modules/
 **/*.mmdb
 **/*.d.?ts
+assets/chromium/
 lib/**/index.mjs

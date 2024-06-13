@@ -1,0 +1,11 @@
+{
+  "ext_description": {
+    "message": "Capture The Flag — browser extension."
+  },
+  "ext_name": {
+    "message": "Capture The Flag"
+  },
+  "ext_short_name": {
+    "message": "CTF"
+  }
+}
