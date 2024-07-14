@@ -1,3 +1,7 @@
+#!/usr/bin/env node --import tsx
+
+console.log('argv:', process.argv.slice(2));
+
 import fs from 'node:fs/promises';
 import { argv } from 'node:process';
 
@@ -12,9 +16,8 @@ if (watch) {
 
   const WATCH_ROOT = import.meta.resolve('../src');
 
-  for await (const _event of fs.watch(WATCH_ROOT, { recursive: true })) {
+  for await (const _ignored of fs.watch(WATCH_ROOT, { recursive: true })) {
     clearConsole();
-
     await build(args, { watch });
   }
 }

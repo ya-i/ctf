@@ -6,3 +6,5 @@ export async function init(response: Pick<Response, 'arrayBuffer'>) {
 
   return new Reader<CountryResponse>(db);
 }
+
+export type { CountryResponse, Reader };

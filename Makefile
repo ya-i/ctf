@@ -7,13 +7,18 @@ fmt :
 	bun x eslint --fix .
 	@ git diff-index --quiet HEAD
 
+.PHONY : build
+build :
+	bun x tsc
+	bun bin/build.ts
+
 .PHONY : test
 test :
 	bun test
 
 .PHONY : clean
 clean :
-	-rm assets/chromium/{*.json,*.js}
+	-rm assets/{chromium,firefox}/{*.css,*.js,*.html,*.json}
 
 .PHONY : distclean
 distclean : clean

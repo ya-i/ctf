@@ -6,7 +6,6 @@
     "target": "ESNext",
     "module": "ESNext",
     "moduleDetection": "force",
-    "lib": ["ESNext", "DOM", "WebWorker"],
     "jsx": "react-jsx",
     "allowJs": true,
 

@@ -39,7 +39,7 @@ export default class Manifest {
       },
 
       permissions: ['webRequest', 'storage'],
-      host_permissions: ['<all_urls>'],
+      host_permissions: undefined,
       author,
 
       browser_specific_settings: undefined,
@@ -77,6 +77,10 @@ export default class Manifest {
     switch (target) {
       case 'firefox':
         _.set(manifest, 'manifest_version', 2);
+        _.set(manifest, 'background', {
+          scripts: ['background.js'],
+          type: 'module',
+        });
         _.set(manifest, 'page_action', this.action);
         _.set(manifest, 'browser_specific_settings', {
           gecko: {
@@ -85,12 +89,14 @@ export default class Manifest {
         });
 
         manifest.permissions.unshift('dns');
+        manifest.permissions.push('<all_urls>');
 
         break;
       case 'chromium':
         _.set(manifest, 'manifest_version', 3);
         _.set(manifest, 'background.service_worker', 'service_worker.js');
         _.set(manifest, 'action', this.action);
+        _.set(manifest, 'host_permissions', ['<all_urls>']);
 
         manifest.permissions.push('offscreen');
 

@@ -1,7 +1,6 @@
 node_modules/
 **/*.mmdb
 **/*.d.?ts
+assets/firefox/
 assets/chromium/
-!assets/chromium/_locales/
-!assets/chromium/icons/
 lib/**/index.mjs
