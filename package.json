@@ -57,7 +57,7 @@
     "eslint-plugin-react-hooks": "^4.5.0",
     "fork-ts-checker-webpack-plugin": "^7.2.3",
     "html-webpack-plugin": "^5.5.0",
-    "husky": "^8.0.1",
+    "husky": "^9.1.5",
     "i18n-iso-countries": "^7.11.2",
     "jest": "^27.5.1",
     "lint-staged": "12.5.0",
